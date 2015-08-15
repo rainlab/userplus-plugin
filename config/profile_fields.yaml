@@ -1,0 +1,47 @@
+# ===================================
+#  Extended Profile Field Definitions
+# ===================================
+
+phone:
+    label: rainlab.userplus::lang.user.phone
+    tab: Profile
+    span: left
+
+mobile:
+    label: rainlab.userplus::lang.user.mobile
+    tab: Profile
+    span: right
+
+company:
+    label: rainlab.userplus::lang.user.company
+    tab: Profile
+    span: left
+
+street_addr:
+    label: rainlab.userplus::lang.user.street_addr
+    tab: Profile
+
+city:
+    label: rainlab.userplus::lang.user.city
+    tab: Profile
+    span: left
+
+zip:
+    label: rainlab.userplus::lang.user.zip
+    tab: Profile
+    span: right
+
+country:
+    label: rainlab.location::lang.country.label
+    placeholder: rainlab.location::lang.country.select
+    type: dropdown
+    tab: Profile
+    span: left
+
+state:
+    label: rainlab.location::lang.state.label
+    placeholder: rainlab.location::lang.state.select
+    type: dropdown
+    tab: Profile
+    span: right
+    dependsOn: country

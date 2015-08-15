@@ -1,0 +1,8 @@
+1.0.1: First version of User Profile
+1.0.2:
+    - Reintroduce profile fields that were removed from User plugin
+    - user_add_profile_fields.php
+    - user_add_location_fields.php
+1.0.3:
+    - Add mobile phone user profile field.
+    - user_add_mobile_field.php
