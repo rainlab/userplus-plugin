@@ -8,11 +8,6 @@ class UserAddLocationFields extends Migration
 
     public function up()
     {
-        /*
-         * These fields were previously owned by RainLab.User
-         * so this occurance is detected and migration skips
-         * @deprecated Safe to remove if year >= 2017
-         */
         if (Schema::hasColumns('users', ['state_id', 'country_id'])) {
             return;
         }
@@ -26,11 +21,6 @@ class UserAddLocationFields extends Migration
 
     public function down()
     {
-        Schema::table('users', function($table)
-        {
-            $table->dropColumn('state_id');
-            $table->dropColumn('country_id');
-        });
     }
 
 }

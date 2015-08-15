@@ -8,6 +8,10 @@ class UserAddMobileField extends Migration
 
     public function up()
     {
+        if (Schema::hasColumn('users', 'mobile')) {
+            return;
+        }
+
         Schema::table('users', function($table)
         {
             $table->string('mobile', 100)->nullable();
@@ -16,10 +20,6 @@ class UserAddMobileField extends Migration
 
     public function down()
     {
-        Schema::table('users', function($table)
-        {
-            $table->dropColumn('mobile');
-        });
     }
 
 }
