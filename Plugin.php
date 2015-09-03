@@ -11,7 +11,6 @@ use RainLab\User\Controllers\Users as UsersController;
  */
 class Plugin extends PluginBase
 {
-
     public $require = ['RainLab.User', 'RainLab.Location'];
 
     /**
@@ -46,10 +45,9 @@ class Plugin extends PluginBase
         });
 
         UsersController::extendFormFields(function($widget) {
-            $configFile = __DIR__ . '/config/profile_fields.yaml';
+            $configFile = __DIR__.'/config/profile_fields.yaml';
             $config = Yaml::parse(File::get($configFile));
             $widget->addTabFields($config);
         });
     }
-
 }
