@@ -5,6 +5,9 @@ return [
         'name' => 'User Plus+',
         'description' => 'Adds profile fields to users.',
     ],
+    'tab' => [
+        'profile' => 'Profile',
+    ],
     'user' => [
         'phone' => 'Phone',
         'mobile' => 'Mobile',
