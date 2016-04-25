@@ -46,6 +46,11 @@ class Plugin extends PluginBase
         });
 
         UsersController::extendFormFields(function($widget) {
+            // Prevent extending of related form instead of the intended User form
+            if (!$widget->model instanceof UserModel) {
+                return;
+            }
+
             $configFile = __DIR__ . '/config/profile_fields.yaml';
             $config = Yaml::parse(File::get($configFile));
             $widget->addTabFields($config);
