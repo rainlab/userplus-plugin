@@ -1,0 +1,21 @@
+{
+    "name": "rainlab/userplus-plugin",
+    "type": "october-plugin",
+    "description": "User plus plugin for October CMS",
+    "homepage": "https://octobercms.com/plugin/rainlab-userplus",
+    "keywords": ["october", "octobercms", "blog", "userplus", "user"],
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Alexey Bobkov",
+            "email": "aleksey.bobkov@gmail.com",
+            "role": "Co-founder"
+        },
+        {
+            "name": "Samuel Georges",
+            "email": "daftspunky@gmail.com",
+            "role": "Co-founder"
+        }
+    ],
+    "minimum-stability": "dev"
+}
