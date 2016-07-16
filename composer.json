@@ -21,7 +21,7 @@
         "php": ">=5.5.9",
         "composer/installers": "~1.0",
         "rainlab/user-plugin": "dev-master",
-        "rainlab/location-plugin": "dev-master",
+        "rainlab/location-plugin": "dev-master"
     },
     "minimum-stability": "dev"
 }
