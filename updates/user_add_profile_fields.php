@@ -8,7 +8,7 @@ class UserAddProfileFields extends Migration
 
     public function up()
     {
-        if (Schema::hasColumns('users', ['phone', 'company'])) {
+        if (Schema::hasColumns('users', ['phone', 'company', 'street_addr', 'city', 'zip'])) {
             return;
         }
 
@@ -24,6 +24,9 @@ class UserAddProfileFields extends Migration
 
     public function down()
     {
+        Schema::table('users', function ($table) {
+            $table->dropColumn(['phone', 'company', 'street_addr', 'city', 'zip']);
+        });
     }
 
 }
