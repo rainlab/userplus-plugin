@@ -20,6 +20,11 @@ class UserAddMobileField extends Migration
 
     public function down()
     {
+        if (Schema::hasTable('users')) {
+            Schema::table('users', function ($table) {
+                $table->dropColumn(['mobile']);
+            });
+        }
     }
 
 }

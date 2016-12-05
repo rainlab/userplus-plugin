@@ -24,9 +24,11 @@ class UserAddProfileFields extends Migration
 
     public function down()
     {
-        Schema::table('users', function ($table) {
-            $table->dropColumn(['phone', 'company', 'street_addr', 'city', 'zip']);
-        });
+        if (Schema::hasTable('users')) {
+            Schema::table('users', function ($table) {
+                $table->dropColumn(['phone', 'company', 'street_addr', 'city', 'zip']);
+            });
+        }
     }
 
 }
