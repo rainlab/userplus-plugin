@@ -5,7 +5,6 @@ use October\Rain\Database\Updates\Migration;
 
 class UserAddProfileFields extends Migration
 {
-
     public function up()
     {
         if (Schema::hasColumns('users', ['phone', 'company', 'street_addr', 'city', 'zip'])) {
@@ -28,5 +27,4 @@ class UserAddProfileFields extends Migration
             $table->dropColumn(['phone', 'company', 'street_addr', 'city', 'zip']);
         });
     }
-
 }

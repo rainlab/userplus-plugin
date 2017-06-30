@@ -4,7 +4,9 @@ use Yaml;
 use File;
 use System\Classes\PluginBase;
 use RainLab\User\Models\User as UserModel;
+use RainLab\Notify\Models\Notification as NotificationModel;
 use RainLab\User\Controllers\Users as UsersController;
+use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 
 /**
  * UserPlus Plugin Information File
@@ -12,7 +14,7 @@ use RainLab\User\Controllers\Users as UsersController;
 class Plugin extends PluginBase
 {
 
-    public $require = ['RainLab.User', 'RainLab.Location'];
+    public $require = ['RainLab.User', 'RainLab.Location', 'RainLab.Notify'];
 
     /**
      * Returns information about this plugin.
@@ -32,6 +34,13 @@ class Plugin extends PluginBase
 
     public function boot()
     {
+        $this->extendUserModel();
+        $this->extendUsersController();
+        $this->extendSaveDatabaseAction();
+    }
+
+    protected function extendUserModel()
+    {
         UserModel::extend(function($model) {
             $model->addFillable([
                 'phone',
@@ -43,8 +52,17 @@ class Plugin extends PluginBase
             ]);
 
             $model->implement[] = 'RainLab.Location.Behaviors.LocationModel';
-        });
 
+            $model->morphMany['notifications'] = [
+                NotificationModel::class,
+                'name' => 'notifiable',
+                'order' => 'created_at desc'
+            ];
+        });
+    }
+
+    protected function extendUsersController()
+    {
         UsersController::extendFormFields(function($widget) {
             // Prevent extending of related form instead of the intended User form
             if (!$widget->model instanceof UserModel) {
@@ -57,4 +75,14 @@ class Plugin extends PluginBase
         });
     }
 
+    protected function extendSaveDatabaseAction()
+    {
+        SaveDatabaseAction::extend(function ($action) {
+            $action->addTableDefinition([
+                'label' => 'User activity',
+                'class' => UserModel::class,
+                'param' => 'user'
+            ]);
+        });
+    }
 }
