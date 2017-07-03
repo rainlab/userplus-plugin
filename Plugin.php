@@ -75,8 +75,23 @@ class Plugin extends PluginBase
         });
     }
 
+    public function registerNotificationRules()
+    {
+        return [
+            'events' => [],
+            'actions' => [],
+            'conditions' => [
+                \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class
+            ],
+        ];
+    }
+
     protected function extendSaveDatabaseAction()
     {
+        if (!class_exists(SaveDatabaseAction::class)) {
+            return;
+        }
+
         SaveDatabaseAction::extend(function ($action) {
             $action->addTableDefinition([
                 'label' => 'User activity',
