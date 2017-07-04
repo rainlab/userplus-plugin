@@ -7,6 +7,7 @@ use RainLab\User\Models\User as UserModel;
 use RainLab\Notify\Models\Notification as NotificationModel;
 use RainLab\User\Controllers\Users as UsersController;
 use RainLab\Notify\NotifyRules\SaveDatabaseAction;
+use RainLab\User\Classes\UserEventBase;
 
 /**
  * UserPlus Plugin Information File
@@ -37,6 +38,7 @@ class Plugin extends PluginBase
         $this->extendUserModel();
         $this->extendUsersController();
         $this->extendSaveDatabaseAction();
+        $this->extendUserEventBase();
     }
 
     protected function extendUserModel()
@@ -84,6 +86,17 @@ class Plugin extends PluginBase
                 \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class
             ],
         ];
+    }
+
+    protected function extendUserEventBase()
+    {
+        if (!class_exists(UserEventBase::class)) {
+            return;
+        }
+
+        UserEventBase::extend(function($event) {
+            $event->conditions[] = \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class;
+        });
     }
 
     protected function extendSaveDatabaseAction()
