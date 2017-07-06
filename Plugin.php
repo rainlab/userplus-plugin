@@ -41,6 +41,13 @@ class Plugin extends PluginBase
         $this->extendUserEventBase();
     }
 
+    public function registerComponents()
+    {
+        return [
+            \RainLab\UserPlus\Components\Notifications::class => 'notifications',
+        ];
+    }
+
     protected function extendUserModel()
     {
         UserModel::extend(function($model) {

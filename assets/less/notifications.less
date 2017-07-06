@@ -1,0 +1,84 @@
+.rainlab-userplus {
+    position: relative;
+
+    .notifications-popover {
+        background: #fff;
+        border: 1px solid #f0f0f0;
+        position: absolute;
+        width: 480px;
+        z-index: 2;
+        right: 0;
+        display: none;
+    }
+
+    &.active .notifications-popover {
+        display: block;
+    }
+
+    .notifications-header {
+        border-bottom: 1px solid #f0f0f0;
+        padding: 15px;
+
+        h4 {
+            padding: 0;
+            margin: 0;
+            display: inline-block;
+        }
+
+        .close, .mark-all-read {
+            float: right;
+            margin: 0 5px;
+        }
+    }
+
+    .notifications-content {
+        .notifications-loading {
+            padding: 20px;
+            font-size: 24px;
+            text-align: center;
+        }
+
+        .no-notifications {
+            text-align: center;
+            padding: 25px;
+            margin: 0;
+        }
+
+        > ul {
+            padding: 0;
+            margin: 0;
+            list-style: none;
+            overflow: auto;
+            max-height: 400px;
+        }
+
+        > ul > li {
+            position: relative;
+            padding: 10px 25px 10px 60px;
+            border-bottom: 1px solid #f9f9f9;
+
+            > i {
+                position: absolute;
+                left: 25px;
+                top: 12px;
+                font-size: 18px;
+                opacity: .5;
+            }
+
+            .parsed-body > *:last-child {
+                margin-bottom: 0;
+            }
+
+            .date {
+                white-space: nowrap;
+                opacity: .75;
+            }
+        }
+    }
+
+    .notifications-footer {
+        border-top: 1px solid #f0f0f0;
+        padding: 15px;
+        text-align: center;
+    }
+}
