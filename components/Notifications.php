@@ -34,6 +34,10 @@ class Notifications extends ComponentBase
 
     public function onRun()
     {
+        if (!Auth::getUser()) {
+            return;
+        }
+
         if ($this->property('includeAssets')) {
             $this->addCss('assets/css/notifications.css');
             $this->addJs('assets/js/notifications.js');
