@@ -5,7 +5,6 @@ use October\Rain\Database\Updates\Migration;
 
 class UserAddMobileField extends Migration
 {
-
     public function up()
     {
         if (Schema::hasColumn('users', 'mobile')) {
@@ -26,5 +25,4 @@ class UserAddMobileField extends Migration
             });
         }
     }
-
 }

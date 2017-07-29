@@ -5,7 +5,6 @@ use October\Rain\Database\Updates\Migration;
 
 class UserAddLocationFields extends Migration
 {
-
     public function up()
     {
         if (Schema::hasColumns('users', ['state_id', 'country_id'])) {
@@ -27,5 +26,4 @@ class UserAddLocationFields extends Migration
             });
         }
     }
-
 }
