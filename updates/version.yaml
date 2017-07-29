@@ -7,3 +7,4 @@
     - Add mobile phone user profile field.
     - user_add_mobile_field.php
 1.0.4: Add various languages and minor bug fixes.
+1.1.0: Compatibility with Notify plugin.
