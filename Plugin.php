@@ -78,7 +78,7 @@ class Plugin extends PluginBase
                 return;
             }
 
-            $configFile = __DIR__ . '/config/profile_fields.yaml';
+            $configFile = plugins_path('rainlab/userplus/config/profile_fields.yaml');
             $config = Yaml::parse(File::get($configFile));
             $widget->addTabFields($config);
         });
@@ -92,6 +92,7 @@ class Plugin extends PluginBase
             'conditions' => [
                 \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class
             ],
+            'presets' => '$/rainlab/userplus/config/notify_presets.yaml',
         ];
     }
 
