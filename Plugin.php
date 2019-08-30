@@ -59,8 +59,9 @@ class Plugin extends PluginBase
                 'city',
                 'zip'
             ]);
-
-            $model->implement[] = 'RainLab.Location.Behaviors.LocationModel';
+            if (!is_array($model->implement) || !in_array('RainLab.Location.Behaviors.LocationModel', $model->implement)) {
+                $model->implement[] = 'RainLab.Location.Behaviors.LocationModel';
+            }
 
             $model->morphMany['notifications'] = [
                 NotificationModel::class,
