@@ -57,7 +57,9 @@ class Plugin extends PluginBase
                 'company',
                 'street_addr',
                 'city',
-                'zip'
+                'zip',
+                'state_id',
+                'country_id'
             ]);
 
             $model->implement[] = 'RainLab.Location.Behaviors.LocationModel';
