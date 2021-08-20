@@ -20,8 +20,9 @@
     "require": {
         "php": ">=5.5.9",
         "composer/installers": "~1.0",
-        "rainlab/user-plugin": "dev-master",
-        "rainlab/location-plugin": "dev-master"
+        "rainlab/user-plugin": "~1.0",
+        "rainlab/notify-plugin": "~1.0",
+        "rainlab/location-plugin": "~1.0"
     },
     "minimum-stability": "dev"
 }

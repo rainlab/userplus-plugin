@@ -10,11 +10,13 @@ use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 use RainLab\User\Classes\UserEventBase;
 
 /**
- * UserPlus Plugin Information File
+ * Plugin Information File
  */
 class Plugin extends PluginBase
 {
-
+    /**
+     * @var array require plugins
+     */
     public $require = ['RainLab.User', 'RainLab.Location', 'RainLab.Notify'];
 
     /**
