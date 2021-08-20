@@ -82,7 +82,9 @@ class Plugin extends PluginBase
 
             $configFile = plugins_path('rainlab/userplus/config/profile_fields.yaml');
             $config = Yaml::parse(File::get($configFile));
-            $widget->addTabFields($config);
+            if($widget->isNested === false) {
+                $widget->addTabFields($config);
+            }
         });
     }
 
