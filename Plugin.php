@@ -61,8 +61,9 @@ class Plugin extends PluginBase
                 'city',
                 'zip'
             ]);
-            if (!is_array($model->implement) || !in_array('RainLab.Location.Behaviors.LocationModel', $model->implement)) {
-                $model->implement[] = 'RainLab.Location.Behaviors.LocationModel';
+
+            if (!$model->isClassExtendedWith(\RainLab\Location\Behaviors\LocationModel::class)) {
+                $model->extendClassWith(\RainLab\Location\Behaviors\LocationModel::class);
             }
 
             $model->morphMany['notifications'] = [
@@ -81,11 +82,13 @@ class Plugin extends PluginBase
                 return;
             }
 
+            if ($widget->isNested) {
+                return;
+            }
+
             $configFile = plugins_path('rainlab/userplus/config/profile_fields.yaml');
             $config = Yaml::parse(File::get($configFile));
-            if($widget->isNested === false) {
-                $widget->addTabFields($config);
-            }
+            $widget->addTabFields($config);
         });
     }
 
