@@ -1,11 +1,9 @@
 v1.0.1: First version of User Profile
-v1.0.2:
-    - Reintroduce profile fields that were removed from User plugin
-    - user_add_profile_fields.php
-    - user_add_location_fields.php
-v1.0.3:
-    - Add mobile phone user profile field.
-    - user_add_mobile_field.php
+v1.0.2: Reintroduce profile fields that were removed from User plugin
+v1.0.3: Add mobile phone user profile field.
 v1.0.4: Add various languages and minor bug fixes.
 v1.1.0: Compatibility with Notify plugin.
 v1.2.0: Fixes support for October CMS 2.0
+v2.0.0:
+    - Extend user plugin fields
+    - extend_users_table.php
