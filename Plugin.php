@@ -4,9 +4,7 @@ use Yaml;
 use File;
 use System\Classes\PluginBase;
 use RainLab\User\Models\User as UserModel;
-use RainLab\Notify\Models\Notification as NotificationModel;
 use RainLab\User\Controllers\Users as UsersController;
-use RainLab\Notify\NotifyRules\SaveDatabaseAction;
 use RainLab\User\Classes\UserEventBase;
 
 /**
@@ -19,34 +17,35 @@ class Plugin extends PluginBase
      */
     public $require = [
         'RainLab.User',
-        'RainLab.Location',
-        'RainLab.Notify'
+        'RainLab.Location'
     ];
 
     /**
-     * Returns information about this plugin.
-     *
-     * @return array
+     * pluginDetails
      */
     public function pluginDetails()
     {
         return [
-            'name'        => 'rainlab.userplus::lang.plugin.name',
-            'description' => 'rainlab.userplus::lang.plugin.description',
-            'author'      => 'Alexey Bobkov, Samuel Georges',
-            'icon'        => 'icon-user-plus',
-            'homepage'    => 'https://github.com/rainlab/userplus-plugin'
+            'name' => "User Plus",
+            'description' => "Extended user management features",
+            'author' => 'Alexey Bobkov, Samuel Georges',
+            'icon' => 'icon-user-plus',
+            'homepage' => 'https://github.com/rainlab/userplus-plugin'
         ];
     }
 
+    /**
+     * boot
+     */
     public function boot()
     {
         $this->extendUserModel();
         $this->extendUsersController();
-        $this->extendSaveDatabaseAction();
-        $this->extendUserEventBase();
     }
 
+    /**
+     * registerComponents
+     */
     public function registerComponents()
     {
         return [
@@ -54,6 +53,9 @@ class Plugin extends PluginBase
         ];
     }
 
+    /**
+     * extendUserModel
+     */
     protected function extendUserModel()
     {
         UserModel::extend(function($model) {
@@ -78,6 +80,9 @@ class Plugin extends PluginBase
         });
     }
 
+    /**
+     * extendUsersController
+     */
     protected function extendUsersController()
     {
         UsersController::extendFormFields(function($widget) {
@@ -93,44 +98,6 @@ class Plugin extends PluginBase
             $configFile = plugins_path('rainlab/userplus/config/profile_fields.yaml');
             $config = Yaml::parse(File::get($configFile));
             $widget->addTabFields($config);
-        });
-    }
-
-    public function registerNotificationRules()
-    {
-        return [
-            'events' => [],
-            'actions' => [],
-            'conditions' => [
-                \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class
-            ],
-            'presets' => '$/rainlab/userplus/config/notify_presets.yaml',
-        ];
-    }
-
-    protected function extendUserEventBase()
-    {
-        if (!class_exists(UserEventBase::class)) {
-            return;
-        }
-
-        UserEventBase::extend(function($event) {
-            $event->conditions[] = \RainLab\UserPlus\NotifyRules\UserLocationAttributeCondition::class;
-        });
-    }
-
-    protected function extendSaveDatabaseAction()
-    {
-        if (!class_exists(SaveDatabaseAction::class)) {
-            return;
-        }
-
-        SaveDatabaseAction::extend(function ($action) {
-            $action->addTableDefinition([
-                'label' => 'User activity',
-                'class' => UserModel::class,
-                'param' => 'user'
-            ]);
         });
     }
 }
