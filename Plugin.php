@@ -26,8 +26,8 @@ class Plugin extends PluginBase
     public function pluginDetails()
     {
         return [
-            'name' => "User Plus",
-            'description' => "Extended user management features",
+            'name' => "User Plus+",
+            'description' => "Adds profile fields to users.",
             'author' => 'Alexey Bobkov, Samuel Georges',
             'icon' => 'icon-user-plus',
             'homepage' => 'https://github.com/rainlab/userplus-plugin'
