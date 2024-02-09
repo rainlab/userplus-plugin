@@ -2,10 +2,9 @@
 
 use Yaml;
 use File;
+use Event;
 use System\Classes\PluginBase;
-use RainLab\User\Models\User as UserModel;
-use RainLab\User\Controllers\Users as UsersController;
-use RainLab\User\Classes\UserEventBase;
+use October\Rain\Extension\Container as ExtensionContainer;
 
 /**
  * Plugin Information File
@@ -49,7 +48,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
-            \RainLab\UserPlus\Components\AddressBook::class => 'addressbook',
+            \RainLab\UserPlus\Components\AddressBook::class => 'addressBook',
             \RainLab\UserPlus\Components\Notifications::class => 'notifications',
         ];
     }
@@ -59,23 +58,18 @@ class Plugin extends PluginBase
      */
     protected function extendUserModel()
     {
-        UserModel::extend(function($model) {
+        ExtensionContainer::extendClass(\RainLab\User\Models\User::class, function($model) {
             $model->addFillable([
-                'phone',
-                'mobile',
                 'company',
-                'street_addr',
+                'phone',
                 'city',
-                'zip'
+                'zip',
             ]);
 
-            if (!$model->isClassExtendedWith(\RainLab\Location\Behaviors\LocationModel::class)) {
-                $model->extendClassWith(\RainLab\Location\Behaviors\LocationModel::class);
-            }
+            $model->implementClassWith(\RainLab\Location\Behaviors\LocationModel::class);
 
-            $model->morphMany['notifications'] = [
-                NotificationModel::class,
-                'name' => 'notifiable',
+            $model->hasMany['notifications'] = [
+                \RainLab\UserPlus\Models\Notification::class,
                 'order' => 'created_at desc'
             ];
         });
@@ -86,13 +80,12 @@ class Plugin extends PluginBase
      */
     protected function extendUsersController()
     {
-        UsersController::extendFormFields(function($widget) {
-            // Prevent extending of related form instead of the intended User form
-            if (!$widget->model instanceof UserModel) {
-                return;
-            }
-
-            if ($widget->isNested) {
+        Event::listen('backend.form.extendFields', function($widget) {
+            if (
+                !$widget->getController() instanceof \RainLab\User\Controllers\Users ||
+                !$widget->getModel() instanceof \RainLab\User\Models\User ||
+                $widget->isNested
+            ) {
                 return;
             }
 
