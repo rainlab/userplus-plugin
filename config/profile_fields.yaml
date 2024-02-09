@@ -3,45 +3,36 @@
 # ===================================
 
 phone:
-    label: rainlab.userplus::lang.user.phone
-    tab: rainlab.userplus::lang.tab.profile
+    label: Phone
+    tab: Profile
     span: left
-
-mobile:
-    label: rainlab.userplus::lang.user.mobile
-    tab: rainlab.userplus::lang.tab.profile
-    span: right
 
 company:
-    label: rainlab.userplus::lang.user.company
-    tab: rainlab.userplus::lang.tab.profile
+    label: Company
+    tab: Profile
     span: left
 
-street_addr:
-    label: rainlab.userplus::lang.user.street_addr
-    tab: rainlab.userplus::lang.tab.profile
-
 city:
-    label: rainlab.userplus::lang.user.city
-    tab: rainlab.userplus::lang.tab.profile
+    label: City
+    tab: Profile
     span: left
 
 zip:
-    label: rainlab.userplus::lang.user.zip
-    tab: rainlab.userplus::lang.tab.profile
+    label: Zip
+    tab: Profile
     span: right
 
 country:
-    label: rainlab.location::lang.country.label
-    placeholder: rainlab.location::lang.country.select
+    label: Country
+    placeholder: -- select country --
     type: dropdown
-    tab: rainlab.userplus::lang.tab.profile
+    tab: Profile
     span: left
 
 state:
-    label: rainlab.location::lang.state.label
-    placeholder: rainlab.location::lang.state.select
+    label: State
+    placeholder: -- select state --
     type: dropdown
-    tab: rainlab.userplus::lang.tab.profile
+    tab: Profile
     span: right
     dependsOn: country
