@@ -5,16 +5,25 @@ use Carbon\Carbon;
 use Cms\Classes\ComponentBase;
 use ApplicationException;
 
+/**
+ * Notifications component
+ */
 class Notifications extends ComponentBase
 {
+    /**
+     * componentDetails
+     */
     public function componentDetails()
     {
         return [
-            'name'        => 'Notifications Component',
-            'description' => 'Display user and site-wide notifications'
+            'name' => "Notifications Component",
+            'description' => "Display user and site-wide notifications"
         ];
     }
 
+    /**
+     * defineProperties
+     */
     public function defineProperties()
     {
         return [
@@ -32,6 +41,9 @@ class Notifications extends ComponentBase
         ];
     }
 
+    /**
+     * onRun
+     */
     public function onRun()
     {
         if (!Auth::getUser()) {
@@ -46,17 +58,26 @@ class Notifications extends ComponentBase
         $this->prepareVars();
     }
 
+    /**
+     * prepareVars
+     */
     protected function prepareVars()
     {
         $this->page['recordsToDisplay'] = $this->getRecordCountToDisplay();
         $this->page['hasNotifications'] = $this->hasNotifications();
     }
 
+    /**
+     * hasNotifications
+     */
     public function hasNotifications()
     {
         return $this->getUnreadQuery()->count() > 0;
     }
 
+    /**
+     * unreadNotifications
+     */
     public function unreadNotifications($recordsToDisplay = null)
     {
         if (!$recordsToDisplay) {
@@ -66,16 +87,18 @@ class Notifications extends ComponentBase
         return $this->getUnreadQuery()->paginate($recordsToDisplay);
     }
 
-    //
-    // AJAX
-    //
-
+    /**
+     * onLoadNotifications handler
+     */
     public function onLoadNotifications()
     {
         $this->prepareVars();
         $this->page['notifications'] = $this->unreadNotifications();
     }
 
+    /**
+     * onLoadOlderNotifications handler
+     */
     public function onLoadOlderNotifications()
     {
         $recordsToDisplay = $this->getRecordCountToDisplay() + $this->property('recordsPerPage');
@@ -84,6 +107,9 @@ class Notifications extends ComponentBase
         $this->page['notifications'] = $this->unreadNotifications($recordsToDisplay);
     }
 
+    /**
+     * onMarkAllNotificationsAsRead handler
+     */
     public function onMarkAllNotificationsAsRead()
     {
         $this->getUnreadQuery()->update(['read_at' => Carbon::now()]);
@@ -92,15 +118,17 @@ class Notifications extends ComponentBase
         $this->page['notifications'] = $this->unreadNotifications();
     }
 
-    //
-    // Helpers
-    //
-
+    /**
+     * getRecordCountToDisplay
+     */
     protected function getRecordCountToDisplay()
     {
         return ((int) post('records_per_page')) ?: $this->property('recordsPerPage');
     }
 
+    /**
+     * getUnreadQuery
+     */
     protected function getUnreadQuery()
     {
         if (!$user = Auth::getUser()) {

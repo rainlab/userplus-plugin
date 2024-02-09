@@ -49,6 +49,7 @@ class Plugin extends PluginBase
     public function registerComponents()
     {
         return [
+            \RainLab\UserPlus\Components\AddressBook::class => 'addressbook',
             \RainLab\UserPlus\Components\Notifications::class => 'notifications',
         ];
     }

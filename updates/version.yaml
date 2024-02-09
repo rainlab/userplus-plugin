@@ -5,5 +5,7 @@ v1.0.4: Add various languages and minor bug fixes.
 v1.1.0: Compatibility with Notify plugin.
 v1.2.0: Fixes support for October CMS 2.0
 v2.0.0:
-    - Extend user plugin fields
+    - Major Upgrade to User+ Plugin
+    - 000001_create_user_notifications.php
+    - 000002_create_user_addresses.php
     - extend_users_table.php
