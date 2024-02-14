@@ -68,6 +68,17 @@ class Plugin extends PluginBase
 
             $model->implementClassWith(\RainLab\Location\Behaviors\LocationModel::class);
 
+            $model->hasOne['primary_address'] = [
+                \RainLab\UserPlus\Models\UserAddress::class,
+                'conditions' => 'is_default = true',
+                'default' => ['is_default' => true]
+            ];
+
+            $model->hasMany['addresses'] = [
+                \RainLab\UserPlus\Models\UserAddress::class,
+                'order' => 'is_default desc'
+            ];
+
             $model->hasMany['notifications'] = [
                 \RainLab\UserPlus\Models\Notification::class,
                 'order' => 'created_at desc'
