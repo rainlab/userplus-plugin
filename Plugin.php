@@ -91,18 +91,49 @@ class Plugin extends PluginBase
      */
     protected function extendUsersController()
     {
-        Event::listen('backend.form.extendFields', function($widget) {
+        Event::listen('backend.form.extendFields', function(\Backend\Widgets\Form $widget) {
             if (
+                $widget->isNested ||
                 !$widget->getController() instanceof \RainLab\User\Controllers\Users ||
-                !$widget->getModel() instanceof \RainLab\User\Models\User ||
-                $widget->isNested
+                !$widget->getModel() instanceof \RainLab\User\Models\User
             ) {
                 return;
             }
 
-            $configFile = plugins_path('rainlab/userplus/config/profile_fields.yaml');
-            $config = Yaml::parse(File::get($configFile));
-            $widget->addTabFields($config);
+            $widget->addTabField('phone', 'Phone')->tab("Profile")->span('auto');
+            $widget->addTabField('company', 'Company')->tab("Profile")->span('auto');
+            $widget->addTabField('city', 'City')->tab("Profile")->span('auto');
+            $widget->addTabField('zip', 'Zip')->tab("Profile")->span('auto');
+            $widget->addTabField('country', 'Country')->tab("Profile")->span('auto')->displayAs('dropdown')->placeholder("-- select state --");
+            $widget->addTabField('state', 'State')->tab("Profile")->span('auto')->displayAs('dropdown')->dependsOn('country')->placeholder("-- select state --");
+        });
+
+        Event::listen('backend.list.extendColumns', function(\Backend\Widgets\Lists $widget) {
+            if (
+                !$widget->getController() instanceof \RainLab\User\Controllers\Users ||
+                !$widget->getModel() instanceof \RainLab\User\Models\User
+            ) {
+                return;
+            }
+
+            $widget->defineColumn('company', "Company")->after('email')->searchable();
+            $widget->defineColumn('phone', "Phone")->after('email')->searchable();
+            $widget->defineColumn('city', "City")->after('email')->searchable()->invisible();
+            $widget->defineColumn('zip', "Zip")->after('email')->searchable()->invisible();
+            $widget->defineColumn('state', "State")->after('email')->invisible()->relation('state')->select('name');
+            $widget->defineColumn('country', "Country")->after('email')->invisible()->relation('country')->select('name');
+        });
+
+        Event::listen('backend.filter.extendScopes', function(\Backend\Widgets\Filter $widget) {
+            if (
+                !$widget->getController() instanceof \RainLab\User\Controllers\Users ||
+                !$widget->getModel() instanceof \RainLab\User\Models\User
+            ) {
+                return;
+            }
+
+            $widget->defineScope('country', "Country")->after('created_at')->displayAs('group')->emptyOption("Unspecified");
+            $widget->defineScope('state', "State")->after('created_at')->displayAs('group')->optionsMethod('getStateOptionsForFilter')->dependsOn('country')->emptyOption("Unspecified");
         });
     }
 }
