@@ -8,7 +8,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('user_addresses', function (Blueprint $table) {
-            $table->id();
+            $table->bigIncrements('id');
             $table->string('first_name')->nullable();
             $table->string('last_name')->nullable();
             $table->string('company')->nullable();

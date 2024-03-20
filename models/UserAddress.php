@@ -9,10 +9,8 @@ use RainLab\User\Models\User;
  * @property int $id
  * @property string $first_name
  * @property string $last_name
- * @property string $full_name
  * @property string $company
  * @property string $phone
- * @property string $address_formatted
  * @property string $address_line1
  * @property string $address_line2
  * @property string $city
@@ -30,6 +28,7 @@ use RainLab\User\Models\User;
  */
 class UserAddress extends Model
 {
+    use \RainLab\UserPlus\Models\UserAddress\HasModelAttributes;
     use \RainLab\Location\Traits\LocationModel;
     use \October\Rain\Database\Traits\Nullable;
     use \October\Rain\Database\Traits\SoftDelete;
@@ -100,37 +99,5 @@ class UserAddress extends Model
                 'country_id' => $this->country_id,
             ]);
         }
-    }
-
-    /**
-     * getFullNameAttribute
-     */
-    public function getFullNameAttribute()
-    {
-        return "{$this->first_name} {$this->last_name}";
-    }
-
-    /**
-     * getAddressFormattedAttribute
-     */
-    public function getAddressFormattedAttribute()
-    {
-        $addressFormat = ':address_line1, :city :state_name :zip, :country_name (:first_name :last_name)';
-
-        $string = strtr($addressFormat, [
-            ':first_name' => $this->first_name,
-            ':last_name' => $this->last_name,
-            ':address_line1' => $this->address_line1,
-            ':city' => $this->city,
-            ':zip' => $this->zip,
-            ':state_name' => $this->state?->name,
-            ':state_code' => $this->state?->code,
-            ':country_name' => $this->country?->name,
-            ':country_code' => $this->country?->code,
-        ]);
-
-        $string = preg_replace('/\s+/', ' ', $string);
-
-        return $string;
     }
 }

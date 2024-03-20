@@ -19,7 +19,7 @@ fields:
         label: Phone
         span: auto
 
-    address_line1:
+    street_address:
         label: Address
         span: full
         type: textarea

@@ -14,9 +14,9 @@ use ForbiddenException;
 class AddressBook extends ComponentBase
 {
     /**
-     * @var array addressBook cache
+     * @var array addresses cache
      */
-    protected $addressBook;
+    protected $addresses;
 
     /**
      * componentDetails
@@ -94,10 +94,18 @@ class AddressBook extends ComponentBase
     }
 
     /**
-     * addressBook returns addresses owned by the user
+     * addresses returns addresses owned by the user
      */
-    public function addressBook()
+    public function addresses()
     {
-        return $this->addressBook ??= Auth::user()?->addresses;
+        return $this->addresses ??= Auth::user()?->addresses;
+    }
+
+    /**
+     * hasAddresses
+     */
+    public function hasAddresses()
+    {
+        return count($this->addresses() ?: []) > 0;
     }
 }

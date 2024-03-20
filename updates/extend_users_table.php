@@ -9,6 +9,8 @@ return new class extends Migration
     {
         if (!Schema::hasColumn('users', 'zip')) {
             Schema::table('users', function($table) {
+                $table->string('address_line1')->nullable();
+                $table->string('address_line2')->nullable();
                 $table->string('company')->nullable();
                 $table->string('phone')->nullable();
                 $table->string('city')->nullable();

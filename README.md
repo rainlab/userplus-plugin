@@ -2,7 +2,7 @@
 
 This plugin extends the [User plugin](http://octobercms.com/plugin/rainlab-user) with extra profile fields and features.
 
-* Adds the following extra fields to a user: `phone`, `mobile`, `company`, `street_addr`, `city`, `zip`.
+* Adds the following extra fields to a user: `company`, `phone`, `address_line1`, `address_line2`, `city`, `zip`, `state_id`, `country_id`.
 * A user can belong to a Country and/or State, sourced from the [Location plugin](http://octobercms.com/plugin/rainlab-location).
 
 ### Potential features
