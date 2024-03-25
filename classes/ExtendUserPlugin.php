@@ -1,24 +1,38 @@
 <?php namespace RainLab\UserPlus\Classes;
 
 use Config;
+use October\Rain\Extension\Container as ExtensionContainer;
 
 /**
- * UserPlusEventHandler
+ * ExtendUserPlugin
  */
-class UserPlusEventHandler
+class ExtendUserPlugin
 {
     /**
      * subscribe
      */
     public function subscribe($events)
     {
-        $events->listen('user.users.extendPreviewTabs', [$this, 'extendPreviewTabs']);
+        $this->extendUserModel();
 
-        $events->listen('backend.form.extendFields', [$this, 'extendFormFields']);
+        $events->listen('user.users.extendPreviewTabs', [static::class, 'extendPreviewTabs']);
 
-        $events->listen('backend.list.extendColumns', [$this, 'extendListColumns']);
+        $events->listen('backend.form.extendFields', [static::class, 'extendFormFields']);
 
-        $events->listen('backend.filter.extendScopes', [$this, 'extendFilterScopes']);
+        $events->listen('backend.list.extendColumns', [static::class, 'extendListColumns']);
+
+        $events->listen('backend.filter.extendScopes', [static::class, 'extendFilterScopes']);
+    }
+
+    /**
+     * extendUserModel
+     */
+    public function extendUserModel()
+    {
+        ExtensionContainer::extendClass(\RainLab\User\Models\User::class, static function($model) {
+            $model->implementClassWith(\RainLab\Location\Behaviors\LocationModel::class);
+            $model->implementClassWith(\RainLab\UserPlus\Behaviors\UserPlusModel::class);
+        });
     }
 
     /**
@@ -38,7 +52,7 @@ class UserPlusEventHandler
      */
     public function extendFormFields(\Backend\Widgets\Form $widget)
     {
-        if ($widget->isNested || !$this->checkControllerModelMatch($widget)) {
+        if ($widget->isNested || !$this->checkControllerMatchesUser($widget)) {
             return;
         }
 
@@ -70,7 +84,7 @@ class UserPlusEventHandler
      */
     public function extendListColumns(\Backend\Widgets\Lists $widget)
     {
-        if (!$this->checkControllerModelMatch($widget)) {
+        if (!$this->checkControllerMatchesUser($widget)) {
             return;
         }
 
@@ -87,7 +101,7 @@ class UserPlusEventHandler
      */
     public function extendFilterScopes(\Backend\Widgets\Filter $widget)
     {
-        if (!$this->checkControllerModelMatch($widget)) {
+        if (!$this->checkControllerMatchesUser($widget)) {
             return;
         }
 
@@ -104,9 +118,9 @@ class UserPlusEventHandler
     }
 
     /**
-     * checkControllerModelMatch
+     * checkControllerMatchesUser
      */
-    protected function checkControllerModelMatch($widget): bool
+    protected function checkControllerMatchesUser($widget): bool
     {
         return $widget->getController() instanceof \RainLab\User\Controllers\Users &&
             $widget->getModel() instanceof \RainLab\User\Models\User;

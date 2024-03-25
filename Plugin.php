@@ -36,7 +36,7 @@ class Plugin extends PluginBase
      */
     public function boot()
     {
-        $this->extendUserPlugin();
+        Event::subscribe(\RainLab\UserPlus\Classes\ExtendUserPlugin::class);
     }
 
     /**
@@ -48,18 +48,5 @@ class Plugin extends PluginBase
             \RainLab\UserPlus\Components\AddressBook::class => 'addressBook',
             \RainLab\UserPlus\Components\Notifications::class => 'notifications',
         ];
-    }
-
-    /**
-     * extendUserPlugin
-     */
-    protected function extendUserPlugin()
-    {
-        Event::subscribe(\RainLab\UserPlus\Classes\UserPlusEventHandler::class);
-
-        ExtensionContainer::extendClass(\RainLab\User\Models\User::class, function($model) {
-            $model->implementClassWith(\RainLab\Location\Behaviors\LocationModel::class);
-            $model->implementClassWith(\RainLab\UserPlus\Behaviors\UserPlusModel::class);
-        });
     }
 }

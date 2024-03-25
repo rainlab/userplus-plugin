@@ -93,6 +93,8 @@ class UserAddress extends Model
     {
         if ($this->is_default && $this->user_id) {
             $this->user()->update([
+                'address_line1' => $this->address_line1,
+                'address_line2' => $this->address_line2,
                 'city' => $this->city,
                 'zip' => $this->zip,
                 'state_id' => $this->state_id,
