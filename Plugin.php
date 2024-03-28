@@ -2,7 +2,6 @@
 
 use Event;
 use System\Classes\PluginBase;
-use October\Rain\Extension\Container as ExtensionContainer;
 
 /**
  * Plugin Information File

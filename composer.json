@@ -19,9 +19,7 @@
     ],
     "require": {
         "php": "^8.0.2",
-        "composer/installers": "~1.0",
-        "rainlab/user-plugin": "~1.0",
-        "rainlab/location-plugin": "~1.0"
+        "composer/installers": "~1.0"
     },
     "minimum-stability": "dev"
 }
