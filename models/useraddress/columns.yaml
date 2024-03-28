@@ -1,0 +1,51 @@
+# ===================================
+#  Column Definitions
+# ===================================
+
+columns:
+    address_formatted:
+        label: Address
+
+    first_name:
+        label: First Name
+        invisible: true
+
+    last_name:
+        label: Last Name
+        invisible: true
+
+    company:
+        label: Company
+        invisible: true
+
+    phone:
+        label: Phone
+        invisible: true
+
+    address_line1:
+        label: Address
+        invisible: true
+
+    city:
+        label: City
+        invisible: true
+
+    zip:
+        label: Zip
+        invisible: true
+
+    state:
+        label: State
+        relation: state
+        select: name
+        invisible: true
+
+    country:
+        label: Country
+        relation: country
+        select: name
+        invisible: true
+
+    is_default:
+        label: Default
+        type: switch
