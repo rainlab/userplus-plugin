@@ -15,13 +15,21 @@ class ExtendUserPlugin
     {
         $this->extendUserModel();
 
+        // User
+
         $events->listen('user.users.extendPreviewTabs', [static::class, 'extendPreviewTabs']);
 
-        $events->listen('backend.form.extendFields', [static::class, 'extendFormFields']);
+        $events->listen('backend.form.extendFields', [static::class, 'extendUserFormFields']);
 
-        $events->listen('backend.list.extendColumns', [static::class, 'extendListColumns']);
+        $events->listen('backend.list.extendColumns', [static::class, 'extendUserListColumns']);
 
-        $events->listen('backend.filter.extendScopes', [static::class, 'extendFilterScopes']);
+        $events->listen('backend.filter.extendScopes', [static::class, 'extendUserFilterScopes']);
+
+        // Settings
+
+        $this->extendSettingModel();
+
+        $events->listen('backend.form.extendFields', [static::class, 'extendSettingFormFields']);
     }
 
     /**
@@ -32,6 +40,18 @@ class ExtendUserPlugin
         ExtensionContainer::extendClass(\RainLab\User\Models\User::class, static function($model) {
             $model->implementClassWith(\RainLab\Location\Behaviors\LocationModel::class);
             $model->implementClassWith(\RainLab\UserPlus\Behaviors\UserPlusModel::class);
+        });
+    }
+
+    /**
+     * extendSettingModel
+     */
+    public function extendSettingModel()
+    {
+        ExtensionContainer::extendClass(\RainLab\User\Models\Setting::class, static function($model) {
+            $model->bindEvent('model.initSettingsData', function() use ($model) {
+                $model->use_address_book = Config::get('rainlab.userplus::use_address_book', true);
+            });
         });
     }
 
@@ -48,9 +68,22 @@ class ExtendUserPlugin
     }
 
     /**
-     * extendFormFields
+     * extendSettingFormFields
      */
-    public function extendFormFields(\Backend\Widgets\Form $widget)
+    public function extendSettingFormFields(\Backend\Widgets\Form $widget)
+    {
+        if (!$this->checkControllerMatchesSetting($widget)) {
+            return;
+        }
+
+        $widget->addTabField('use_address_book', 'Use Address Book')->displayAs('switch')->tab("Profile")->span('full')
+            ->comment("Allow users to manage multiple addresses, otherwise users can provide only a single address.");
+    }
+
+    /**
+     * extendUserFormFields
+     */
+    public function extendUserFormFields(\Backend\Widgets\Form $widget)
     {
         if ($widget->isNested || !$this->checkControllerMatchesUser($widget)) {
             return;
@@ -80,9 +113,9 @@ class ExtendUserPlugin
     }
 
     /**
-     * extendListColumns
+     * extendUserListColumns
      */
-    public function extendListColumns(\Backend\Widgets\Lists $widget)
+    public function extendUserListColumns(\Backend\Widgets\Lists $widget)
     {
         if (!$this->checkControllerMatchesUser($widget)) {
             return;
@@ -97,9 +130,9 @@ class ExtendUserPlugin
     }
 
     /**
-     * extendFilterScopes
+     * extendUserFilterScopes
      */
-    public function extendFilterScopes(\Backend\Widgets\Filter $widget)
+    public function extendUserFilterScopes(\Backend\Widgets\Filter $widget)
     {
         if (!$this->checkControllerMatchesUser($widget)) {
             return;
@@ -114,7 +147,7 @@ class ExtendUserPlugin
      */
     protected function checkUseAddressBook(): bool
     {
-        return Config::get('rainlab.userplus::use_address_book', true);
+        return \RainLab\User\Models\Setting::get('use_address_book', true);
     }
 
     /**
@@ -124,5 +157,14 @@ class ExtendUserPlugin
     {
         return $widget->getController() instanceof \RainLab\User\Controllers\Users &&
             $widget->getModel() instanceof \RainLab\User\Models\User;
+    }
+
+    /**
+     * checkControllerMatchesSetting
+     */
+    protected function checkControllerMatchesSetting($widget): bool
+    {
+        return $widget->getController() instanceof \System\Controllers\Settings &&
+            $widget->getModel() instanceof \RainLab\User\Models\Setting;
     }
 }
