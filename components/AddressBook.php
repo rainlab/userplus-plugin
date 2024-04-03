@@ -10,6 +10,27 @@ use ForbiddenException;
 
 /**
  * AddressBook manages user profile information.
+ *
+ * @property int $id
+ * @property string $first_name
+ * @property string $last_name
+ * @property string $company
+ * @property string $phone
+ * @property string $address_line1
+ * @property string $address_line2
+ * @property string $city
+ * @property string $zip
+ * @property int $state_id
+ * @property int $country_id
+ * @property int $user_id
+ * @property bool $is_business
+ * @property bool $is_default
+ * @property \Illuminate\Support\Carbon $deleted_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon $created_at
+ *
+ * @package rainlab\userplus
+ * @author Alexey Bobkov, Samuel Georges
  */
 class AddressBook extends ComponentBase
 {

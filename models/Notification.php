@@ -6,33 +6,38 @@ use RainLab\User\Models\User;
 
 /**
  * Notification Model stored in the database
+ *
+ * @property int $id
+ * @property string $baseid
+ * @property string $event_type
+ * @property string $type
+ * @property string $icon
+ * @property string $body
+ * @property string $data
+ * @property int $user_id
+ * @property \Illuminate\Support\Carbon $read_at
+ * @property \Illuminate\Support\Carbon $updated_at
+ * @property \Illuminate\Support\Carbon $created_at
+ *
+ * @package rainlab\userplus
+ * @author Alexey Bobkov, Samuel Georges
  */
 class Notification extends Model
 {
     use \October\Rain\Database\Traits\BaseIdentifier;
 
     /**
-     * @var string The database table used by the model.
+     * @var string table associated with the model
      */
     public $table = 'rainlab_user_notifications';
 
     /**
-     * @var array Guarded fields
-     */
-    protected $guarded = [];
-
-    /**
-     * @var array Fillable fields
-     */
-    protected $fillable = [];
-
-    /**
-     * @var array List of attribute names which are json encoded and decoded from the database.
+     * @var array jsonable attribute names that are json encoded and decoded from the database
      */
     protected $jsonable = ['data'];
 
     /**
-     * @var array List of datetime attributes to convert to an instance of Carbon/DateTime objects.
+     * @var array dates attributes that should be mutated to dates
      */
     protected $dates = ['read_at'];
 
@@ -42,11 +47,25 @@ class Notification extends Model
     protected $appends = ['parsed_body'];
 
     /**
-     * @var array Relations
+     * @var array belongsTo relation
      */
     public $belongsTo = [
         'user' => User::class,
     ];
+
+    /**
+     * add a notification for a user
+     */
+    public static function add($userId, $type, $description)
+    {
+        $obj = new static;
+        $obj->user_id = $userId;
+        $obj->type = $type;
+        $obj->description = $description;
+        $obj->save();
+
+        return $obj;
+    }
 
     /**
      * markAsRead marks the notification as read.

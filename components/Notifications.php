@@ -1,7 +1,8 @@
-<?php namespace Rainlab\Userplus\Components;
+<?php namespace RainLab\UserPlus\Components;
 
 use Auth;
 use Carbon\Carbon;
+use RainLab\User\Models\User;
 use Cms\Classes\ComponentBase;
 use ApplicationException;
 
@@ -10,6 +11,11 @@ use ApplicationException;
  */
 class Notifications extends ComponentBase
 {
+    /**
+     * @var int|null countCache for checking number of notifications
+     */
+    protected $countCache;
+
     /**
      * componentDetails
      */
@@ -28,14 +34,14 @@ class Notifications extends ComponentBase
     {
         return [
             'recordsPerPage' => [
-                'title'   => 'Records per page',
+                'title' => 'Records Per Page',
                 'comment' => 'Number of notifications to display per page',
                 'default' => 7
             ],
             'includeAssets' => [
-                'title'   => 'Include assets',
+                'title' => 'Include Assets',
                 'comment' => 'Inject the JavaScript and Stylesheet used by the default component markup',
-                'type'    => 'checkbox',
+                'type' => 'checkbox',
                 'default' => true
             ]
         ];
@@ -46,7 +52,7 @@ class Notifications extends ComponentBase
      */
     public function onRun()
     {
-        if (!Auth::getUser()) {
+        if (!$this->user()) {
             return;
         }
 
@@ -63,28 +69,43 @@ class Notifications extends ComponentBase
      */
     protected function prepareVars()
     {
-        $this->page['recordsToDisplay'] = $this->getRecordCountToDisplay();
-        $this->page['hasNotifications'] = $this->hasNotifications();
+        $this->page['notificationToDisplay'] = $this->getRecordCountToDisplay();
     }
 
     /**
-     * hasNotifications
+     * user returns the logged in user
      */
-    public function hasNotifications()
+    public function user(): ?User
     {
-        return $this->getUnreadQuery()->count() > 0;
+        return Auth::user();
+    }
+
+    /**
+     * hasUnread
+     */
+    public function hasUnread()
+    {
+        return $this->unreadCount() > 0;
+    }
+
+    /**
+     * unreadCount
+     */
+    public function unreadCount()
+    {
+        return $this->countCache ??= $this->getUnreadQuery()->count();
     }
 
     /**
      * unreadNotifications
      */
-    public function unreadNotifications($recordsToDisplay = null)
+    public function unreadNotifications($notificationToDisplay = null)
     {
-        if (!$recordsToDisplay) {
-            $recordsToDisplay = $this->getRecordCountToDisplay();
+        if (!$notificationToDisplay) {
+            $notificationToDisplay = $this->getRecordCountToDisplay();
         }
 
-        return $this->getUnreadQuery()->paginate($recordsToDisplay);
+        return $this->getUnreadQuery()->paginate($notificationToDisplay);
     }
 
     /**
@@ -97,14 +118,14 @@ class Notifications extends ComponentBase
     }
 
     /**
-     * onLoadOlderNotifications handler
+     * onLoadMoreNotifications handler
      */
-    public function onLoadOlderNotifications()
+    public function onLoadMoreNotifications()
     {
-        $recordsToDisplay = $this->getRecordCountToDisplay() + $this->property('recordsPerPage');
+        $notificationToDisplay = $this->getRecordCountToDisplay() + $this->property('recordsPerPage');
 
-        $this->page['recordsToDisplay'] = $recordsToDisplay;
-        $this->page['notifications'] = $this->unreadNotifications($recordsToDisplay);
+        $this->page['notificationToDisplay'] = $notificationToDisplay;
+        $this->page['notifications'] = $this->unreadNotifications($notificationToDisplay);
     }
 
     /**

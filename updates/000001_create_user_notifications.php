@@ -9,12 +9,12 @@ return new class extends Migration
     {
         Schema::create('rainlab_user_notifications', function(Blueprint $table) {
             $table->bigIncrements('id');
+            $table->bigInteger('user_id')->unsigned()->nullable()->index();
             $table->string('baseid')->nullable()->index();
             $table->string('event_type');
-            $table->bigInteger('user_id')->unsigned()->nullable()->index();
-            $table->string('icon')->nullable();
             $table->string('type')->nullable();
-            $table->text('body')->nullable();
+            $table->string('icon')->nullable();
+            $table->mediumText('body')->nullable();
             $table->mediumText('data');
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
