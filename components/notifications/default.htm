@@ -1,21 +1,21 @@
 {% if __SELF__.user %}
-<form class="user-notifications-control" data-control="user-notifications">
-    <div class="notifications-popover">
-        <div class="notifications-header">
-            <h4>Notifications</h4>
+    <form class="user-notifications-control" data-control="user-notifications">
+        <div class="notifications-popover">
+            <div class="notifications-header">
+                <h4>Notifications</h4>
 
-            <a href="javascript:;" class="mark-all-read" data-notifications-mark-read-all>
-                Mark all as read
-            </a>
+                <a href="javascript:;" class="mark-all-read" data-notifications-mark-read-all>
+                    Mark all as read
+                </a>
 
-            <button type="button" class="btn-close" data-notifications-toggle></button>
-        </div>
+                <button type="button" class="btn-close" data-notifications-toggle></button>
+            </div>
 
-        <div class="notifications-content" id="notificationsContent">
-            <div class="notifications-loading">
-                <span></span>
+            <div class="notifications-content" id="notificationsContent">
+                <div class="notifications-loading">
+                    <span></span>
+                </div>
             </div>
         </div>
-    </div>
-</form>
+    </form>
 {% endif %}
