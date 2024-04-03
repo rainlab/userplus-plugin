@@ -4,6 +4,7 @@
  * HasModelAttributes
  *
  * @property string $full_name
+ * @property string $street_address
  * @property string $address_formatted
  *
  * @package rainlab\userplus

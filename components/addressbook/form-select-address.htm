@@ -1,0 +1,9 @@
+{% set addressBookId = addressBookId|default(post('address_book_id')) %}
+{% set addresses = user.addresses|default([]) %}
+<select class="form-select" name="address_book_id">
+    {% for address in addresses %}
+        {% set isSelected = (not addressBookId and address.is_default) or (address.id == addressBookId) %}
+        <option value="{{ address.id }}" {{ isSelected ? 'selected'}}>{{ address.address_formatted }}</option>
+    {% endfor %}
+    <option {{ addressBookId == 0 ? 'selected' }}>Use A New Address</option>
+</select>

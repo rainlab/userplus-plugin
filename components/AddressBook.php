@@ -108,4 +108,12 @@ class AddressBook extends ComponentBase
     {
         return count($this->addresses() ?: []) > 0;
     }
+
+    /**
+     * useAddressBook
+     */
+    public function useAddressBook(): bool
+    {
+        return \RainLab\User\Models\Setting::get('use_address_book', true);
+    }
 }
