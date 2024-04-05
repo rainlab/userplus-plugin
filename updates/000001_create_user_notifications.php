@@ -11,11 +11,10 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->bigInteger('user_id')->unsigned()->nullable()->index();
             $table->string('baseid')->nullable()->index();
-            $table->string('event_type');
             $table->string('type')->nullable();
             $table->string('icon')->nullable();
             $table->mediumText('body')->nullable();
-            $table->mediumText('data');
+            $table->mediumText('data')->nullable();
             $table->timestamp('read_at')->nullable();
             $table->timestamps();
         });

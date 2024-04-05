@@ -54,9 +54,9 @@ class Notification extends Model
     ];
 
     /**
-     * add a notification for a user
+     * createRecord adds a notification for a user
      */
-    public static function add($userId, $type, $description)
+    public static function createRecord($userId, $type, $description)
     {
         $obj = new static;
         $obj->user_id = $userId;
