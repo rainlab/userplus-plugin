@@ -2,7 +2,7 @@
     <ul class="notifications">
         {% for notification in notifications %}
             <li class="type-{{ notification.type }}">
-                <i class="icon-{{ notification.icon|default('star') }}"></i>
+                <i class="bi bi-{{ notification.icon|default('star') }}"></i>
                 <div class="parsed-body">{{ notification.parsed_body|raw }}</div>
                 <div class="text-muted date">{{ notification.created_at|date('M d, Y') }}</div>
             </li>
@@ -11,7 +11,7 @@
 
     {% if notifications.lastItem() < notifications.total %}
         <div class="notifications-footer">
-            <a href="javascript:;" onclick="loadOlderNotifications(this)" class="text-muted">
+            <a href="javascript:;" class="text-muted" data-notifications-load-more>
                 View older messages ({{notifications.total - notifications.lastItem()}})
             </a>
         </div>

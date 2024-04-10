@@ -136,7 +136,10 @@ class Notifications extends ComponentBase
         $this->getUnreadQuery()->update(['read_at' => Carbon::now()]);
 
         $this->prepareVars();
+
         $this->page['notifications'] = $this->unreadNotifications();
+
+        $this->dispatchBrowserEvent('user:notifications-read');
     }
 
     /**

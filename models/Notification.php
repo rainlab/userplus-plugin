@@ -9,7 +9,6 @@ use RainLab\User\Models\User;
  *
  * @property int $id
  * @property string $baseid
- * @property string $event_type
  * @property string $type
  * @property string $icon
  * @property string $body
@@ -56,12 +55,12 @@ class Notification extends Model
     /**
      * createRecord adds a notification for a user
      */
-    public static function createRecord($userId, $type, $description)
+    public static function createRecord($userId, $type, $body)
     {
         $obj = new static;
         $obj->user_id = $userId;
         $obj->type = $type;
-        $obj->description = $description;
+        $obj->body = $body;
         $obj->save();
 
         return $obj;
