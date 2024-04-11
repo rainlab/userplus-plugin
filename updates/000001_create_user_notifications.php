@@ -12,7 +12,6 @@ return new class extends Migration
             $table->bigInteger('user_id')->unsigned()->nullable()->index();
             $table->string('baseid')->nullable()->index();
             $table->string('type')->nullable();
-            $table->string('icon')->nullable();
             $table->mediumText('body')->nullable();
             $table->mediumText('data')->nullable();
             $table->timestamp('read_at')->nullable();

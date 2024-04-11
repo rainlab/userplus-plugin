@@ -2,7 +2,7 @@
     <ul class="notifications">
         {% for notification in notifications %}
             <li class="type-{{ notification.type }}">
-                <i class="bi bi-{{ notification.icon|default('star') }}"></i>
+                <i class="bi bi-{{ notification.data.icon|default('star') }}"></i>
                 <div class="parsed-body">{{ notification.parsed_body|raw }}</div>
                 <div class="text-muted date">{{ notification.created_at|date('M d, Y') }}</div>
             </li>

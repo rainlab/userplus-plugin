@@ -5,12 +5,11 @@ use Markdown;
 use RainLab\User\Models\User;
 
 /**
- * Notification Model stored in the database
+ * UserNotification Model stored in the database
  *
  * @property int $id
  * @property string $baseid
  * @property string $type
- * @property string $icon
  * @property string $body
  * @property string $data
  * @property int $user_id
@@ -21,7 +20,7 @@ use RainLab\User\Models\User;
  * @package rainlab\userplus
  * @author Alexey Bobkov, Samuel Georges
  */
-class Notification extends Model
+class UserNotification extends Model
 {
     use \October\Rain\Database\Traits\BaseIdentifier;
 
@@ -55,12 +54,15 @@ class Notification extends Model
     /**
      * createRecord adds a notification for a user
      */
-    public static function createRecord($userId, $type, $body)
+    public static function createRecord($userId, $type, $body, $data = null)
     {
         $obj = new static;
         $obj->user_id = $userId;
         $obj->type = $type;
         $obj->body = $body;
+        if (is_array($data)) {
+            $obj->data = $data;
+        }
         $obj->save();
 
         return $obj;

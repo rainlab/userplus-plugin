@@ -40,7 +40,7 @@ class UserPlusModel extends ModelBehavior
         ];
 
         $model->hasMany['notifications'] = [
-            \RainLab\UserPlus\Models\Notification::class,
+            \RainLab\UserPlus\Models\UserNotification::class,
             'order' => 'created_at desc'
         ];
     }
