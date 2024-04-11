@@ -139,7 +139,7 @@ class Notifications extends ComponentBase
 
         $this->page['notifications'] = $this->unreadNotifications();
 
-        $this->dispatchBrowserEvent('user:notifications-read');
+        $this->dispatchBrowserEvent('user:notification-count', ['unreadCount' => 0]);
     }
 
     /**
