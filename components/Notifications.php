@@ -1,40 +1,58 @@
-<?php namespace Rainlab\Userplus\Components;
+<?php namespace RainLab\UserPlus\Components;
 
 use Auth;
 use Carbon\Carbon;
+use RainLab\User\Models\User;
 use Cms\Classes\ComponentBase;
 use ApplicationException;
 
+/**
+ * Notifications component
+ */
 class Notifications extends ComponentBase
 {
+    /**
+     * @var int|null countCache for checking number of notifications
+     */
+    protected $countCache;
+
+    /**
+     * componentDetails
+     */
     public function componentDetails()
     {
         return [
-            'name'        => 'Notifications Component',
-            'description' => 'Display user and site-wide notifications'
+            'name' => "Notifications Component",
+            'description' => "Display user and site-wide notifications"
         ];
     }
 
+    /**
+     * defineProperties
+     */
     public function defineProperties()
     {
         return [
             'recordsPerPage' => [
-                'title'   => 'Records per page',
+                'title' => 'Records Per Page',
                 'comment' => 'Number of notifications to display per page',
                 'default' => 7
             ],
             'includeAssets' => [
-                'title'   => 'Include assets',
+                'title' => 'Include Assets',
                 'comment' => 'Inject the JavaScript and Stylesheet used by the default component markup',
-                'type'    => 'checkbox',
+                'type' => 'checkbox',
                 'default' => true
             ]
         ];
     }
 
+    /**
+     * onRun
+     */
     public function onRun()
     {
-        if (!Auth::getUser()) {
+        if (!$this->user()) {
             return;
         }
 
@@ -46,61 +64,95 @@ class Notifications extends ComponentBase
         $this->prepareVars();
     }
 
+    /**
+     * prepareVars
+     */
     protected function prepareVars()
     {
-        $this->page['recordsToDisplay'] = $this->getRecordCountToDisplay();
-        $this->page['hasNotifications'] = $this->hasNotifications();
+        $this->page['notificationToDisplay'] = $this->getRecordCountToDisplay();
     }
 
-    public function hasNotifications()
+    /**
+     * user returns the logged in user
+     */
+    public function user(): ?User
     {
-        return $this->getUnreadQuery()->count() > 0;
+        return Auth::user();
     }
 
-    public function unreadNotifications($recordsToDisplay = null)
+    /**
+     * hasUnread
+     */
+    public function hasUnread()
     {
-        if (!$recordsToDisplay) {
-            $recordsToDisplay = $this->getRecordCountToDisplay();
+        return $this->unreadCount() > 0;
+    }
+
+    /**
+     * unreadCount
+     */
+    public function unreadCount()
+    {
+        return $this->countCache ??= $this->getUnreadQuery()->count();
+    }
+
+    /**
+     * unreadNotifications
+     */
+    public function unreadNotifications($notificationToDisplay = null)
+    {
+        if (!$notificationToDisplay) {
+            $notificationToDisplay = $this->getRecordCountToDisplay();
         }
 
-        return $this->getUnreadQuery()->paginate($recordsToDisplay);
+        return $this->getUnreadQuery()->paginate($notificationToDisplay);
     }
 
-    //
-    // AJAX
-    //
-
+    /**
+     * onLoadNotifications handler
+     */
     public function onLoadNotifications()
     {
         $this->prepareVars();
         $this->page['notifications'] = $this->unreadNotifications();
     }
 
-    public function onLoadOlderNotifications()
+    /**
+     * onLoadMoreNotifications handler
+     */
+    public function onLoadMoreNotifications()
     {
-        $recordsToDisplay = $this->getRecordCountToDisplay() + $this->property('recordsPerPage');
+        $notificationToDisplay = $this->getRecordCountToDisplay() + $this->property('recordsPerPage');
 
-        $this->page['recordsToDisplay'] = $recordsToDisplay;
-        $this->page['notifications'] = $this->unreadNotifications($recordsToDisplay);
+        $this->page['notificationToDisplay'] = $notificationToDisplay;
+        $this->page['notifications'] = $this->unreadNotifications($notificationToDisplay);
     }
 
+    /**
+     * onMarkAllNotificationsAsRead handler
+     */
     public function onMarkAllNotificationsAsRead()
     {
         $this->getUnreadQuery()->update(['read_at' => Carbon::now()]);
 
         $this->prepareVars();
+
         $this->page['notifications'] = $this->unreadNotifications();
+
+        $this->dispatchBrowserEvent('user:notification-count', ['unreadCount' => 0]);
     }
 
-    //
-    // Helpers
-    //
-
+    /**
+     * getRecordCountToDisplay
+     */
     protected function getRecordCountToDisplay()
     {
         return ((int) post('records_per_page')) ?: $this->property('recordsPerPage');
     }
 
+    /**
+     * getUnreadQuery
+     */
     protected function getUnreadQuery()
     {
         if (!$user = Auth::getUser()) {
