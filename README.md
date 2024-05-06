@@ -8,7 +8,7 @@ This plugin extends the [User plugin](https://octobercms.com/plugin/rainlab-user
 
 View this plugin on the October CMS marketplace:
 
-- https://octobercms.com/plugin/rainlab-user
+- https://octobercms.com/plugin/rainlab-userplus
 
 ### Address Book Component
 
