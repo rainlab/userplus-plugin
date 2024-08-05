@@ -5,6 +5,7 @@
 columns:
     address_formatted:
         label: Address
+        sortable: false
 
     first_name:
         label: First Name

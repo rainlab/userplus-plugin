@@ -43,12 +43,14 @@ fields:
         label: Country
         type: dropdown
         span: auto
+        placeholder: -- select --
 
     state:
         label: State
         type: dropdown
         span: auto
         dependsOn: country
+        placeholder: -- select --
 
     is_default:
         label: Default
