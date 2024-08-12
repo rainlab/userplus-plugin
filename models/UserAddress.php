@@ -44,8 +44,6 @@ class UserAddress extends Model
      * @var array rules for validation
      */
     public $rules = [
-        'first_name' => 'required',
-        'last_name' => 'required',
         'address_line1' => 'required',
         'city' => 'required',
         'zip' => 'required',
