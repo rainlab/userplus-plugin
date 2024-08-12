@@ -9,4 +9,5 @@ v2.0.0:
     - 000001_create_user_notifications.php
     - 000002_create_user_addresses.php
     - extend_users_table.php
-v2.0.1: Fixes profile tab extension in user controller
+v2.0.1: Fixes profile tab extension in user controller.
+v2.0.2: Improve address book user experience.
