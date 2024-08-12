@@ -7,5 +7,8 @@
   "Company": "Company",
   "Street Address": "Street Address",
   "City": "City",
-  "Zip": "Zip"
+  "Zip": "Zip",
+  "To First Name": "To First Name",
+  "To Last Name": "To Last Name",
+  "Leave this field blank if it the same as the current the user.": "Leave this field blank if it the same as the current the user."
 }
