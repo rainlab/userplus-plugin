@@ -43,7 +43,12 @@ trait HasModelAttributes
      */
     public function getAddressFormattedAttribute()
     {
-        $addressFormat = ':address, :city :state_name :zip, :country_name (:first_name :last_name)';
+        if ($this->first_name || $this->last_name) {
+            $addressFormat = ':address, :city :state_name :zip, :country_name (:first_name :last_name)';
+        }
+        else {
+            $addressFormat = ':address, :city :state_name :zip, :country_name';
+        }
 
         $address = $this->address_line1;
         if ($this->address_line2) {
