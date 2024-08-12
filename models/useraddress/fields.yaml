@@ -10,6 +10,7 @@ fields:
         size: tiny
         cssClass: pb-2
         required: true
+        autoFocus: true
 
     is_business:
         label: Location is a business address
