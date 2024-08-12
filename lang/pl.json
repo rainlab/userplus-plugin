@@ -1,0 +1,14 @@
+{
+  "User Plus+": "Użytkownik Plus+",
+  "Adds profile fields to users.": "Dodaje pola profilu dla użytkowników.",
+  "Phone": "Telefon",
+  "Profile": "Profil",
+  "Mobile": "Przenośny",
+  "Company": "Firma",
+  "Street Address": "Adres uliczny",
+  "City": "Miasto",
+  "Zip": "Zamek błyskawiczny",
+  "To First Name": "Do Imienia",
+  "To Last Name": "Do nazwiska",
+  "Leave this field blank if it the same as the current the user.": "Pozostaw to pole puste, jeśli jest to ten sam użytkownik, co obecny."
+}

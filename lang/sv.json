@@ -1,0 +1,14 @@
+{
+  "User Plus+": "Användare Plus+",
+  "Adds profile fields to users.": "Lägger till profilfält för användare.",
+  "Phone": "Telefon",
+  "Profile": "Profil",
+  "Mobile": "Mobil",
+  "Company": "Företag",
+  "Street Address": "Gatuadress",
+  "City": "Stad",
+  "Zip": "Blixtlås",
+  "To First Name": "Till Förnamn",
+  "To Last Name": "Till efternamn",
+  "Leave this field blank if it the same as the current the user.": "Lämna detta fält tomt om det är samma som den nuvarande användaren."
+}

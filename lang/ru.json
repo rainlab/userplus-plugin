@@ -1,0 +1,14 @@
+{
+  "User Plus+": "Пользователь Плюс+",
+  "Adds profile fields to users.": "Добавляет поля профиля пользователям.",
+  "Phone": "Телефон",
+  "Profile": "Профиль",
+  "Mobile": "Мобильный",
+  "Company": "Компания",
+  "Street Address": "Адрес улицы",
+  "City": "Город",
+  "Zip": "Почтовый индекс",
+  "To First Name": "Имя",
+  "To Last Name": "По Фамилии",
+  "Leave this field blank if it the same as the current the user.": "Оставьте это поле пустым, если оно совпадает с текущим пользователем."
+}

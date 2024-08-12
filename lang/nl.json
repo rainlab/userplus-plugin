@@ -7,5 +7,8 @@
   "Company": "Bedrijf",
   "Street Address": "Adres",
   "City": "Stad",
-  "Zip": "Postcode"
+  "Zip": "Postcode",
+  "To First Name": "Naar Voornaam",
+  "To Last Name": "Naar Achternaam",
+  "Leave this field blank if it the same as the current the user.": "Laat dit veld leeg als het hetzelfde is als de huidige gebruiker."
 }

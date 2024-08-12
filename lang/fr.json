@@ -7,5 +7,8 @@
   "Company": "Société",
   "Street Address": "Adresse",
   "City": "Ville",
-  "Zip": "Code postal"
+  "Zip": "Code postal",
+  "To First Name": "Au prénom",
+  "To Last Name": "Au nom de famille",
+  "Leave this field blank if it the same as the current the user.": "Laissez ce champ vide s'il est identique à celui de l'utilisateur actuel."
 }

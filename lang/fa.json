@@ -2,9 +2,13 @@
   "User Plus+": "گسترش کاربر",
   "Adds profile fields to users.": "افزودن فیلد به پروفایل کاربران",
   "Phone": "تلفن",
+  "Profile": "نمایه",
   "Mobile": "تلفن همراه",
   "Company": "شرکت",
   "Street Address": "آدرس",
   "City": "شهر",
-  "Zip": "کد پستی"
+  "Zip": "کد پستی",
+  "To First Name": "به نام",
+  "To Last Name": "به نام خانوادگی",
+  "Leave this field blank if it the same as the current the user.": "اگر با فیلد فعلی کاربر یکی است، این قسمت را خالی بگذارید."
 }

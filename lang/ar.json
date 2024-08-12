@@ -1,0 +1,14 @@
+{
+  "User Plus+": "المستخدم بلس+",
+  "Adds profile fields to users.": "إضافة حقول الملف الشخصي للمستخدمين.",
+  "Phone": "هاتف",
+  "Profile": "حساب تعريفي",
+  "Mobile": "متحرك",
+  "Company": "شركة",
+  "Street Address": "عنوان الشارع",
+  "City": "مدينة",
+  "Zip": "أَزِيز",
+  "To First Name": "إلى الاسم الأول",
+  "To Last Name": "إلى الاسم الأخير",
+  "Leave this field blank if it the same as the current the user.": "اترك هذا الحقل فارغًا إذا كان هو نفس المستخدم الحالي."
+}
