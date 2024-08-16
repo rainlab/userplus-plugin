@@ -10,5 +10,7 @@
   "Zip": "Cerniera lampo",
   "To First Name": "Al Nome di battesimo",
   "To Last Name": "Al cognome",
-  "Leave this field blank if it the same as the current the user.": "Lasciare vuoto questo campo se è uguale all'utente attuale."
+  "Leave this field blank if it the same as the current the user.": "Lasciare vuoto questo campo se è uguale all'utente attuale.",
+  "Address": "Indirizzo",
+  "Address Book": "Rubrica"
 }

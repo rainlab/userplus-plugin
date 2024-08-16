@@ -10,5 +10,7 @@
   "Zip": "Reißverschluss",
   "To First Name": "An Vorname",
   "To Last Name": "An Nachname",
-  "Leave this field blank if it the same as the current the user.": "Lassen Sie dieses Feld leer, wenn es mit dem aktuellen Benutzer identisch ist."
+  "Leave this field blank if it the same as the current the user.": "Lassen Sie dieses Feld leer, wenn es mit dem aktuellen Benutzer identisch ist.",
+  "Address": "Adresse",
+  "Address Book": "Adressbuch"
 }

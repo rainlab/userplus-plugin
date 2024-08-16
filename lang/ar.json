@@ -10,5 +10,7 @@
   "Zip": "أَزِيز",
   "To First Name": "إلى الاسم الأول",
   "To Last Name": "إلى الاسم الأخير",
-  "Leave this field blank if it the same as the current the user.": "اترك هذا الحقل فارغًا إذا كان هو نفس المستخدم الحالي."
+  "Leave this field blank if it the same as the current the user.": "اترك هذا الحقل فارغًا إذا كان هو نفس المستخدم الحالي.",
+  "Address": "عنوان",
+  "Address Book": "دفتر العناوين"
 }

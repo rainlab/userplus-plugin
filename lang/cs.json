@@ -10,5 +10,7 @@
   "Zip": "PSČ",
   "To First Name": "K křestnímu jménu",
   "To Last Name": "K příjmení",
-  "Leave this field blank if it the same as the current the user.": "Nechte toto pole prázdné, pokud je stejné jako aktuální uživatel."
+  "Leave this field blank if it the same as the current the user.": "Nechte toto pole prázdné, pokud je stejné jako aktuální uživatel.",
+  "Address": "Adresa",
+  "Address Book": "Adresář"
 }

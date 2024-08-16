@@ -10,5 +10,7 @@
   "Zip": "Posta kodu",
   "To First Name": "Adına",
   "To Last Name": "Soyadına",
-  "Leave this field blank if it the same as the current the user.": "Mevcut kullanıcıyla aynıysa bu alanı boş bırakın."
+  "Leave this field blank if it the same as the current the user.": "Mevcut kullanıcıyla aynıysa bu alanı boş bırakın.",
+  "Address": "Adres",
+  "Address Book": "Adres Defteri"
 }

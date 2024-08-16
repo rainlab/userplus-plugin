@@ -10,5 +10,7 @@
   "Zip": "Pošta",
   "To First Name": "Na ime",
   "To Last Name": "Na priimek",
-  "Leave this field blank if it the same as the current the user.": "Pustite to polje prazno, če je isto kot trenutni uporabnik."
+  "Leave this field blank if it the same as the current the user.": "Pustite to polje prazno, če je isto kot trenutni uporabnik.",
+  "Address": "Naslov",
+  "Address Book": "Imenik"
 }
