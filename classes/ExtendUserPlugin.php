@@ -17,7 +17,7 @@ class ExtendUserPlugin
 
         // User
 
-        $events->listen('rainlab.user.view.extendPreviewTabs', [static::class, 'extendPreviewTabs']);
+        $events->listen('rainlab.user.view.extendPreviewTabs', [static::class, 'extendPreviewTabs'], 900);
 
         $events->listen('backend.form.extendFields', [static::class, 'extendUserFormFields']);
 
