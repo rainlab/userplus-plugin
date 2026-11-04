@@ -70,7 +70,7 @@ class ExtendUserPlugin
     /**
      * extendSettingFormFields
      */
-    public function extendSettingFormFields(\Backend\Widgets\Form $widget)
+    public function extendSettingFormFields($widget)
     {
         if (!$this->checkControllerMatchesSetting($widget)) {
             return;
@@ -83,7 +83,7 @@ class ExtendUserPlugin
     /**
      * extendUserFormFields
      */
-    public function extendUserFormFields(\Backend\Widgets\Form $widget)
+    public function extendUserFormFields($widget)
     {
         if ($widget->isNested || !$this->checkControllerMatchesUser($widget)) {
             return;
@@ -115,7 +115,7 @@ class ExtendUserPlugin
     /**
      * extendUserListColumns
      */
-    public function extendUserListColumns(\Backend\Widgets\Lists $widget)
+    public function extendUserListColumns($widget)
     {
         if (!$this->checkControllerMatchesUser($widget)) {
             return;
@@ -132,7 +132,7 @@ class ExtendUserPlugin
     /**
      * extendUserFilterScopes
      */
-    public function extendUserFilterScopes(\Backend\Widgets\Filter $widget)
+    public function extendUserFilterScopes($widget)
     {
         if (!$this->checkControllerMatchesUser($widget)) {
             return;
